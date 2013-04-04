@@ -434,7 +434,10 @@ module Refinery
     def normalize_friendly_id_with_marketable_urls(slug_string)
       sluggified = slug_string.to_slug.normalize!
       if Refinery::Pages.marketable_urls && self.class.friendly_id_config.reserved_words.include?(sluggified)
-        sluggified << "-page"
+        # This is not what we want for Rijnstate. Urls are fixed.
+        # Saving a page should not add the -page postfix to the url.
+        #
+        # sluggified << "-page"
       end
       sluggified
     end
